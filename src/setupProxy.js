@@ -4,7 +4,7 @@ module.exports = app => {
   app.use(
     "/apis",
     proxy({
-      target: "http://jlccwss.vicp.cc:6666",
+      target: "http://cmdb-api.cmdb.svc:8000",
       changeOrigin: true
     })
   );
