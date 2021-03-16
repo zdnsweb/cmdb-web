@@ -1,0 +1,67 @@
+diff --git a/node_modules/ra-core/esm/core/Resource.js b/node_modules/ra-core/esm/core/Resource.js
+index fba07f8..aad5778 100644
+--- a/node_modules/ra-core/esm/core/Resource.js
++++ b/node_modules/ra-core/esm/core/Resource.js
+@@ -47,7 +47,7 @@ var ResourceRegister = function (_a) {
+ var ResourceRoutes = function (_a) {
+     var name = _a.name, match = _a.match, list = _a.list, create = _a.create, edit = _a.edit, show = _a.show, _b = _a.options, options = _b === void 0 ? defaultOptions : _b;
+     var isRegistered = useSelector(function (state) { return !!state.admin.resources[name]; });
+-    var basePath = match ? match.path : '';
++    var basePath = match ? match.url : '';
+     // match tends to change even on the same route ; using memo to avoid an extra render
+     return useMemo(function () {
+         // if the registration hasn't finished, no need to render
+diff --git a/node_modules/ra-core/lib/core/Resource.js b/node_modules/ra-core/lib/core/Resource.js
+index 40a8183..2678300 100644
+--- a/node_modules/ra-core/lib/core/Resource.js
++++ b/node_modules/ra-core/lib/core/Resource.js
+@@ -71,7 +71,7 @@ var ResourceRegister = function (_a) {
+ var ResourceRoutes = function (_a) {
+     var name = _a.name, match = _a.match, list = _a.list, create = _a.create, edit = _a.edit, show = _a.show, _b = _a.options, options = _b === void 0 ? defaultOptions : _b;
+     var isRegistered = react_redux_1.useSelector(function (state) { return !!state.admin.resources[name]; });
+-    var basePath = match ? match.path : '';
++    var basePath = _a.basePath ? _a.basePath : '';
+     // match tends to change even on the same route ; using memo to avoid an extra render
+     return react_1.useMemo(function () {
+         // if the registration hasn't finished, no need to render
+diff --git a/node_modules/ra-core/lib/core/RoutesWithLayout.js b/node_modules/ra-core/lib/core/RoutesWithLayout.js
+index c003511..46108fd 100644
+--- a/node_modules/ra-core/lib/core/RoutesWithLayout.js
++++ b/node_modules/ra-core/lib/core/RoutesWithLayout.js
+@@ -45,7 +45,9 @@ var RoutesWithLayout = function (_a) {
+     return (react_1.default.createElement(react_router_dom_1.Switch, null,
+         customRoutes &&
+             customRoutes.map(function (route, key) { return react_1.cloneElement(route, { key: key }); }),
+-        react_1.Children.map(children, function (child) { return (react_1.default.createElement(react_router_dom_1.Route, { key: child.props.name, path: "/" + child.props.name, render: function (props) {
++        react_1.Children.map(children, function (child) { return (react_1.default.createElement(react_router_dom_1.Route, { 
++            key: child.props.name, path: "/" + (child.props.path ? child.props.path : child.props.name), 
++            render: function (props) {
+                 return react_1.cloneElement(child, __assign({ 
+                     // The context prop instruct the Resource component to
+                     // render itself as a standard component
+diff --git a/node_modules/ra-core/src/core/Resource.tsx b/node_modules/ra-core/src/core/Resource.tsx
+index 0e651cb..b3c9067 100644
+--- a/node_modules/ra-core/src/core/Resource.tsx
++++ b/node_modules/ra-core/src/core/Resource.tsx
+@@ -49,7 +49,7 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
+         (state: ReduxState) => !!state.admin.resources[name]
+     );
+ 
+-    const basePath = match ? match.path : '';
++    const basePath = match ? match.url : '';
+ 
+     // match tends to change even on the same route ; using memo to avoid an extra render
+     return useMemo(() => {
+diff --git a/node_modules/ra-core/src/core/RoutesWithLayout.tsx b/node_modules/ra-core/src/core/RoutesWithLayout.tsx
+index 9624bc7..1a7a611 100644
+--- a/node_modules/ra-core/src/core/RoutesWithLayout.tsx
++++ b/node_modules/ra-core/src/core/RoutesWithLayout.tsx
+@@ -43,7 +43,7 @@ const RoutesWithLayout: FunctionComponent<Props> = ({
+             {Children.map(children, (child: React.ReactElement<any>) => (
+                 <Route
+                     key={child.props.name}
+-                    path={`/${child.props.name}`}
++                    path={`/${child.props.path ? child.props.path : child.props.name}`}
+                     render={props =>
+                         cloneElement(child, {
+                             // The context prop instruct the Resource component to
