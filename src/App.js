@@ -11,6 +11,10 @@ import messages from './i18n/zh';
 import { Dashboard } from './dashboard';
 
 import assets from './assets';
+import datacenters from './datacenters';
+import departments from './departments';
+import deviceclasses from './deviceclasses';
+import devicemodels from './devicemodels';
 
 import users from './users';
 
@@ -57,10 +61,10 @@ const App = () => {
             layout={Layout}
         >
             <Resource name="assets" {...assets} />
-            <Resource name="datacenters" />
-            <Resource name="departments" />
-            <Resource name="deviceclasses" />
-            <Resource name="devicemodels" />
+            <Resource name="datacenters" {...datacenters} />
+            <Resource name="departments" {...departments} />
+            <Resource name="deviceclasses" {...deviceclasses} />
+            <Resource name="devicemodels" {...devicemodels} />
             <Resource name="users" {...users} />
         </Admin>
     );

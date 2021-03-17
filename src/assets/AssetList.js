@@ -53,11 +53,22 @@ class TabbedDatagrid extends React.Component {
                 <Datagrid {...props}>
                     <TextField source="owner" />
                     <TextField source="ip" />
+                    <TextField source="departMent" />
+                    <TextField source="deviceClass" />
+                    <TextField source="deviceModel" />
+                    <TextField source="dataCenter" />
+                    <TextField source="purpose" />
                     <TextField source="masterIp" />
-                    <NumberField source="masterId" />
                     <TextField source="purpose" />
                     <DateField source="updateTime" showTime />
                     <NumberField source="weight" />
+                    <TextField source="state" />
+                    <TextField source="note" />
+                    <TextField source="idrac" />
+                    <TextField source="location" />
+                    <TextField source="number" />
+                    <TextField source="sn" />
+                    <TextField source="net" />
                     <EditButton />
                 </Datagrid>
             </Fragment>

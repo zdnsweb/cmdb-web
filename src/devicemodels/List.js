@@ -23,7 +23,8 @@ class TabbedDatagrid extends React.Component {
         return (
             <Fragment>
                 <Datagrid {...props}>
-                    <TextField source="username" />
+                    <TextField source="name" />
+                    <TextField source="deviceClassId" />
                     <DateField source="updateTime" showTime />
                     <EditButton />
                 </Datagrid>
