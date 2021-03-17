@@ -5,7 +5,10 @@ module.exports = app => {
     "/apis",
     proxy({
       target: "http://cmdb-api.cmdb.svc:8000",
-      changeOrigin: true
+      changeOrigin: true,
+      pathRewrite: {
+        '^/apis/': '/', // remove base path
+      },
     })
   );
 };

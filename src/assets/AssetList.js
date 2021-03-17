@@ -25,7 +25,7 @@ import {
 import { Link } from 'react-router-dom';
 
 
-const SwitchGroupFilter = props => (
+const AssetFilter = props => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
     </Filter>
@@ -35,7 +35,7 @@ const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
 
-const SwitchGroupField = ({ source, record = {} }) => {
+const AssetField = ({ source, record = {} }) => {
     return (
         <Link to={`/zones/${record.id}/rrs`}>
             {record[source]}
@@ -51,7 +51,7 @@ class TabbedDatagrid extends React.Component {
         return (
             <Fragment>
                 <Datagrid {...props}>
-                    <SwitchGroupField source="zoneName" />
+                    <AssetField source="zoneName" />
                     <TextField source="viewName" />
                     <TextField source="defaultTtl" />
                     <DateField source="createTime" showTime />
@@ -67,7 +67,7 @@ const StyledTabbedDatagrid = props => {
     return <TabbedDatagrid classes={classes} {...props} />;
 };
 
-const SwitchGroupList = ({ classes, ...props }) => (
+const AssetList = ({ classes, ...props }) => (
     <List
         {...props}
         pagination={false}
@@ -77,4 +77,4 @@ const SwitchGroupList = ({ classes, ...props }) => (
     </List>
 );
 
-export default SwitchGroupList;
+export default AssetList;

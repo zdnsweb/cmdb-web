@@ -6,23 +6,11 @@ import './App.css';
 
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
-import customRoutes from './routes';
 import messages from './i18n/zh';
 
 import { Dashboard } from './dashboard';
 
-import zones from './zones';
-import rrs from './rrs';
-
-import domains from './domains';
-
-import accounts from './accounts';
-
-import switchGroups from './switch_groups';
-
-import icps from './icps';
-
-import tickets from './tickets';
+import assets from './assets';
 
 import dataProviderFactory from './dataProvider';
 
@@ -60,25 +48,18 @@ const App = () => {
         <Admin
             title=""
             dataProvider={dataProvider}
-            customRoutes={customRoutes}
             authProvider={authProvider}
             i18nProvider={i18nProvider}
             dashboard={Dashboard}
             loginPage={Login}
             layout={Layout}
         >
-            <Resource name="zones/:zone_id/rrs" options={{ label: 'rrs' }} {...rrs} />
-            <Resource name="zones" {...zones} />
-
-            <Resource name="domains" {...domains} />
-
-            <Resource name="accounts" {...accounts} />
-
-            <Resource name="icps" {...icps} />
-
-            <Resource name="tickets" {...tickets} />
-
-            <Resource name="switch_groups" {...switchGroups} />
+            <Resource name="assets" {...assets} />
+            <Resource name="datacenters" />
+            <Resource name="departments" />
+            <Resource name="deviceclasses" />
+            <Resource name="devicemodels" />
+            <Resource name="users" />
         </Admin>
     );
 };

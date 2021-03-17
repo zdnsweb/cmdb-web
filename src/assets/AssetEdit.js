@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    BooleanInput,
     NumberInput,
     Edit,
     TextInput,
@@ -10,12 +9,12 @@ import {
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
-const TicketTitle = ({ record }) => {
+const AssetTitle = ({ record }) => {
     const translate = useTranslate();
     return (
         <span>
-            {translate('resources.zones/:zone_id/rrs.title', {
-                name: record.rrName,
+            {translate('resources.zones.title', {
+                name: record.zoneName,
             })}
         </span>
     );
@@ -25,7 +24,7 @@ const useEditStyles = makeStyles({
     root: { alignItems: 'flex-start' },
 });
 
-const TicketEdit = props => {
+const AssetEdit = props => {
     const classes = useEditStyles();
     const redirect = useRedirect();
 
@@ -35,21 +34,18 @@ const TicketEdit = props => {
 
     return (
         <Edit
-            title={<TicketTitle />}
+            title={<AssetTitle />}
             classes={classes}
             {...props}
             onSuccess={success}
         >
             <SimpleForm>
-                <TextInput source="rrName" disabled />
-                <NumberInput source="rrTtl" min={1} max={2 ** 31 -1} step={1} />
-                <TextInput source="rrType" disabled />
-                <TextInput source="rrValue" />
-                <TextInput source="des" />
-                <BooleanInput source="enable" />
+                <TextInput source="zoneName" disabled />
+                <NumberInput source="defaultTtl" min={1} max={2 ** 31 -1} step={1} />
+                <TextInput source="viewName" disabled />
             </SimpleForm>
         </Edit>
     );
 };
 
-export default TicketEdit;
+export default AssetEdit;

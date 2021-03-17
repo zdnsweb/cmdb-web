@@ -19,7 +19,7 @@ const styles = {
 
 const Dashboard = () => {
     const redirect = useRedirect();
-    redirect('/zones');
+    redirect('/assets');
     return null;
     const [state, setState] = useState({});
     const version = useVersion();

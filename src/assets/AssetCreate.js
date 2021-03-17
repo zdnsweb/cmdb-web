@@ -1,20 +1,21 @@
 import React from 'react';
 import {
     NumberInput,
-    Edit,
+    Create,
     TextInput,
+    SelectInput,
     SimpleForm,
     useRedirect,
     useTranslate,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
-const DomainTitle = ({ record }) => {
+const AssetTitle = ({ record }) => {
     const translate = useTranslate();
     return (
         <span>
             {translate('resources.zones.title', {
-                name: record.zoneName,
+                name: '',
             })}
         </span>
     );
@@ -24,8 +25,15 @@ const useEditStyles = makeStyles({
     root: { alignItems: 'flex-start' },
 });
 
-const DomainEdit = props => {
+const AssetCreate = props => {
     const classes = useEditStyles();
+    const [views, setViews] = React.useState([]);
+    React.useEffect(() => {
+        fetch('/apis/views').then((resp) => resp.json()).then(({ data = []}) => {
+            const views = data.map((v) => ({ id: v.viewName, name: v.viewName }));
+            setViews(views);
+        });
+    }, []);
     const redirect = useRedirect();
 
     const success = () => {
@@ -33,19 +41,22 @@ const DomainEdit = props => {
     };
 
     return (
-        <Edit
-            title={<DomainTitle />}
+        <Create
+            title={<AssetTitle />}
             classes={classes}
             {...props}
             onSuccess={success}
         >
             <SimpleForm>
-                <TextInput source="zoneName" disabled />
+                <TextInput source="zoneName" />
                 <NumberInput source="defaultTtl" min={1} max={2 ** 31 -1} step={1} />
-                <TextInput source="viewName" disabled />
+                <SelectInput
+                    source="viewName"
+                    choices={views}
+                />
             </SimpleForm>
-        </Edit>
+        </Create>
     );
 };
 
-export default DomainEdit;
+export default AssetCreate;
