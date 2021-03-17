@@ -2,7 +2,7 @@ name: docker-buildimage-cmdb-web
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'src/**'
       - 'patches/**'
