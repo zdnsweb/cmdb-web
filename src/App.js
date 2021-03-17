@@ -12,6 +12,8 @@ import { Dashboard } from './dashboard';
 
 import assets from './assets';
 
+import users from './users';
+
 import dataProviderFactory from './dataProvider';
 
 const i18nProvider = polyglotI18nProvider(locale => {
@@ -59,7 +61,7 @@ const App = () => {
             <Resource name="departments" />
             <Resource name="deviceclasses" />
             <Resource name="devicemodels" />
-            <Resource name="users" />
+            <Resource name="users" {...users} />
         </Admin>
     );
 };
