@@ -39,14 +39,14 @@ export default (
     passedHttpClient = fetchUtils.fetchJson,
     countHeader = 'Content-Range'
 ) => {
-    const httpClient = (url) => {
-        const options = {
-            headers: new Headers({ Accept: 'application/json' }),
-        };
+    const httpClient = (url, options = {}) => {
+        const headers = options.headers || new Headers({ Accept: 'application/json' });
+
         const token = inMemoryJWT.getToken();
         if (token) {
-            options.headers.set('Authorization', `Bearer ${token}`);
+            headers.set('Authorization', `Bearer ${token}`);
         }
+        options.headers = headers;
 
         return fetchUtils.fetchJson(url, options);
     };

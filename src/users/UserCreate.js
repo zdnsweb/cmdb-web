@@ -41,8 +41,8 @@ const UserCreate = props => {
             onSuccess={success}
         >
             <SimpleForm>
-                <TextInput autoComplete={false} source="username" />
-                <PasswordInput autoComplete={false} source="password" />
+                <TextInput autoComplete="off" source="username" />
+                <PasswordInput autoComplete="off" source="password" />
             </SimpleForm>
         </Create>
     );
