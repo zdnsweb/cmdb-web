@@ -1,5 +1,5 @@
 import { stringify } from 'query-string';
-import { fetchUtils, DataProvider } from 'ra-core';
+import { fetchUtils } from 'ra-core';
 import inMemoryJWT from './inMemoryJWT';
 
 /**
@@ -53,20 +53,9 @@ export default (
 
     return ({
         getList: (resource, params) => {
-            const { page, perPage } = params.pagination;
-            const { field, order } = params.sort;
-
-            const rangeStart = (page - 1) * perPage;
-            const rangeEnd = page * perPage - 1;
-
             const query = {};
 
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             const url = `${apiUrl}/${resPath}?${stringify(query)}`;
             const options = {};
@@ -82,11 +71,6 @@ export default (
 
         getOne: (resource, params) => {
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             return httpClient(`${apiUrl}/${resPath}/${params.id}`).then(({ json }) => ({
                 data: json,
@@ -102,7 +86,6 @@ export default (
 
         getManyReference: (resource, params) => {
             const { page, perPage } = params.pagination;
-            const { field, order } = params.sort;
 
             const rangeStart = (page - 1) * perPage;
             const rangeEnd = page * perPage - 1;
@@ -131,11 +114,6 @@ export default (
 
         update: (resource, params) => {
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             return httpClient(`${apiUrl}/${resPath}/${params.id}`, {
                 method: 'PUT',
@@ -156,11 +134,6 @@ export default (
 
         create: (resource, params) => {
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             return httpClient(`${apiUrl}/${resPath}`, {
                 method: 'POST',
@@ -172,11 +145,6 @@ export default (
 
         delete: (resource, params) => {
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             return httpClient(`${apiUrl}/${resPath}/${params.id}`, {
                 method: 'DELETE',
@@ -186,11 +154,6 @@ export default (
         // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
         deleteMany: (resource, params) => {
             let resPath = resource;
-            if (resource.includes(':zone_id')) {
-                const reg = /\/zones\/(\w+)\//;
-                const id = reg.exec(window.location.hash)[1];
-                resPath = resource.replace(':zone_id', id);
-            }
 
             return Promise.all(
                 params.ids.map(id =>

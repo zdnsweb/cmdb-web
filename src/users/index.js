@@ -1,12 +1,12 @@
 import InvoiceIcon from '@material-ui/icons/AccountBox';
 
-import AccountList from './AccountList';
-import AccountCreate from './AccountCreate';
-import AccountEdit from './AccountEdit';
+import UserList from './UserList';
+import UserCreate from './UserCreate';
+import UserEdit from './UserEdit';
 
 export default {
-    list: AccountList,
-    create: AccountCreate,
-    edit: AccountEdit,
+    list: UserList,
+    create: UserCreate,
+    edit: UserEdit,
     icon: InvoiceIcon,
 };

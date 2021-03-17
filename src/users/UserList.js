@@ -1,47 +1,19 @@
 import React, { Fragment } from 'react';
 import {
-    AutocompleteInput,
-    BooleanField,
     Datagrid,
     DateField,
-    DateInput,
     EditButton,
-    Filter,
     List,
-    NullableBooleanInput,
-    NumberField,
-    ReferenceInput,
-    SearchInput,
     TextField,
-    TextInput,
 } from 'react-admin';
 import {
     makeStyles,
-    useMediaQuery,
-    Divider,
-    Tabs,
-    Tab,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-
-
-const ZoneFilter = props => (
-    <Filter {...props}>
-        <SearchInput source="q" alwaysOn />
-    </Filter>
-);
 
 const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
 
-const ZoneField = ({ source, record = {} }) => {
-    return (
-        <Link to={`/zones/${record.id}/rrs`}>
-            {record[source]}
-        </Link>
-    );
-};
 
 class TabbedDatagrid extends React.Component {
 
@@ -51,10 +23,12 @@ class TabbedDatagrid extends React.Component {
         return (
             <Fragment>
                 <Datagrid {...props}>
-                    <ZoneField source="zoneName" />
-                    <TextField source="viewName" />
-                    <TextField source="defaultTtl" />
+                    <TextField source="rrName" />
+                    <TextField source="rrType" />
+                    <TextField source="rrTtl" />
+                    <TextField source="rrValue" />
                     <DateField source="createTime" showTime />
+                    <TextField source="des" />
                     <EditButton />
                 </Datagrid>
             </Fragment>
@@ -67,7 +41,7 @@ const StyledTabbedDatagrid = props => {
     return <TabbedDatagrid classes={classes} {...props} />;
 };
 
-const ZoneList = ({ classes, ...props }) => (
+const UserList = ({ classes, ...props }) => (
     <List
         {...props}
         pagination={false}
@@ -77,4 +51,4 @@ const ZoneList = ({ classes, ...props }) => (
     </List>
 );
 
-export default ZoneList;
+export default UserList;

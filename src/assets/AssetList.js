@@ -1,47 +1,19 @@
 import React, { Fragment } from 'react';
 import {
-    AutocompleteInput,
-    BooleanField,
     Datagrid,
     DateField,
-    DateInput,
     EditButton,
-    Filter,
     List,
-    NullableBooleanInput,
     NumberField,
-    ReferenceInput,
-    SearchInput,
     TextField,
-    TextInput,
 } from 'react-admin';
 import {
     makeStyles,
-    useMediaQuery,
-    Divider,
-    Tabs,
-    Tab,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-
-
-const AssetFilter = props => (
-    <Filter {...props}>
-        <SearchInput source="q" alwaysOn />
-    </Filter>
-);
 
 const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
-
-const AssetField = ({ source, record = {} }) => {
-    return (
-        <Link to={`/zones/${record.id}/rrs`}>
-            {record[source]}
-        </Link>
-    );
-};
 
 class TabbedDatagrid extends React.Component {
 
@@ -51,9 +23,9 @@ class TabbedDatagrid extends React.Component {
         return (
             <Fragment>
                 <Datagrid {...props}>
-                    <AssetField source="zoneName" />
+                    <TextField source="zoneName" />
                     <TextField source="viewName" />
-                    <TextField source="defaultTtl" />
+                    <NumberField source="defaultTtl" />
                     <DateField source="createTime" showTime />
                     <EditButton />
                 </Datagrid>

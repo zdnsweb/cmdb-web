@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from '@material-ui/core';
 import { useTranslate, MenuItemLink } from 'react-admin';
 
-import zones from '../zones';
+import assets from '../assets';
 import users from '../users';
+
 import SubMenu from './SubMenu';
 
 const Menu = ({ onMenuClick, dense, logout }) => {
@@ -30,13 +31,13 @@ const Menu = ({ onMenuClick, dense, logout }) => {
                 isOpen={state.asset}
                 sidebarIsOpen={open}
                 name="pos.menu.assetsManagement"
-                icon={<zones.icon />}
+                icon={<assets.icon />}
                 dense={dense}
             >
                 <MenuItemLink
                     to={`/assets`}
                     primaryText={translate(`resources.assets.name`)}
-                    leftIcon={<zones.icon />}
+                    leftIcon={<assets.icon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

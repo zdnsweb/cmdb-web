@@ -1,20 +1,21 @@
 import React from 'react';
 import {
-    NumberInput,
+    BooleanInput,
     Create,
-    TextInput,
+    NumberInput,
     SelectInput,
     SimpleForm,
+    TextInput,
     useRedirect,
     useTranslate,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
-const ZoneTitle = ({ record }) => {
+const UserTitle = ({ record }) => {
     const translate = useTranslate();
     return (
         <span>
-            {translate('resources.zones.title', {
+            {translate('resources.zones/:zone_id/rrs.title', {
                 name: '',
             })}
         </span>
@@ -25,15 +26,16 @@ const useEditStyles = makeStyles({
     root: { alignItems: 'flex-start' },
 });
 
-const ZoneCreate = props => {
+const UserCreate = props => {
     const classes = useEditStyles();
-    const [views, setViews] = React.useState([]);
+    const [rrTypes, setRrTypes] = React.useState([]);
     React.useEffect(() => {
-        fetch('/apis/views').then((resp) => resp.json()).then(({ data = []}) => {
-            const views = data.map((v) => ({ id: v.viewName, name: v.viewName }));
-            setViews(views);
+        fetch('/apis/types').then((resp) => resp.json()).then(({ data = []}) => {
+            const rrTypes = data.map((v) => ({ id: v.typeName, name: v.typeName }));
+            setRrTypes(rrTypes);
         });
     }, []);
+    
     const redirect = useRedirect();
 
     const success = () => {
@@ -42,21 +44,24 @@ const ZoneCreate = props => {
 
     return (
         <Create
-            title={<ZoneTitle />}
+            title={<UserTitle />}
             classes={classes}
             {...props}
             onSuccess={success}
         >
             <SimpleForm>
-                <TextInput source="zoneName" />
-                <NumberInput source="defaultTtl" min={1} max={2 ** 31 -1} step={1} />
+                <TextInput source="rrName" />
+                <NumberInput source="rrTtl" min={1} max={2 ** 31 -1} step={1} />
                 <SelectInput
-                    source="viewName"
-                    choices={views}
+                    source="rrType"
+                    choices={rrTypes}
                 />
+                <TextInput source="rrValue" />
+                <TextInput source="des" />
+                <BooleanInput source="enable" />
             </SimpleForm>
         </Create>
     );
 };
 
-export default ZoneCreate;
+export default UserCreate;

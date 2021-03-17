@@ -1,5 +1,3 @@
-import { domain } from "process";
-
 export default {
     ra: {
         action: {
