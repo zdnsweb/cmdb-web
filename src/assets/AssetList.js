@@ -15,6 +15,34 @@ const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
 
+/**
+ * Data struct 
+ * 
+    dataCenter: "科技网机房"
+    dataCenterId: 3
+    departMent: "顶级域名"
+    departMentId: 3
+    deviceClass: "服务器"
+    deviceModel: "虚拟机"
+    deviceModelId: 7
+    id: 3
+    idrac: ""
+    ip: "203.119.80.88"
+    location: ""
+    masterId: 5
+    masterIp: "202.173.10.1"
+    net: "办公"
+    note: "备注信息"
+    number: ""
+    owner: "余春云"
+    purpose: "strongswan"
+    sn: ""
+    state: "在用"
+    updateTime: "2021-02-18 16:07:37"
+    weight: 0.5
+ * 
+ */
+
 class TabbedDatagrid extends React.Component {
 
     render() {
@@ -23,10 +51,13 @@ class TabbedDatagrid extends React.Component {
         return (
             <Fragment>
                 <Datagrid {...props}>
-                    <TextField source="zoneName" />
-                    <TextField source="viewName" />
-                    <NumberField source="defaultTtl" />
-                    <DateField source="createTime" showTime />
+                    <TextField source="owner" />
+                    <TextField source="ip" />
+                    <TextField source="masterIp" />
+                    <NumberField source="masterId" />
+                    <TextField source="purpose" />
+                    <DateField source="updateTime" showTime />
+                    <NumberField source="weight" />
                     <EditButton />
                 </Datagrid>
             </Fragment>
