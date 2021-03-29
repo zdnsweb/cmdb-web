@@ -59,7 +59,6 @@ class TabbedDatagrid extends React.Component {
                     <TextField source="dataCenter" />
                     <TextField source="purpose" />
                     <TextField source="masterIp" />
-                    <TextField source="purpose" />
                     <DateField source="updateTime" showTime />
                     <NumberField source="weight" />
                     <TextField source="state" />
